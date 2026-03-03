@@ -1,0 +1,17 @@
+{
+  "name": "DetailerStack",
+  "short_name": "DetailerStack",
+  "description": "Software, tools & equipment for mobile car detailing (2026)",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f1117",
+  "theme_color": "#0f1117",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

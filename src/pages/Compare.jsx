@@ -10,27 +10,31 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import ToolCard from "@/components/ToolCard";
 import FeatureFilter from "@/components/FeatureFilter";
 import InternalLinkBlock from "@/components/InternalLinkBlock";
+import SEO from "@/components/SEO";
 
 export default function Compare() {
   const [activeFilter, setActiveFilter] = useState("all");
 
   const { data: tools = [], isLoading } = useQuery({
     queryKey: ["all-tools"],
-    queryFn: () => base44.entities.Tool.list("sort_order", 50)
+    queryFn: () => base44.entities.Tool.list("sort_order", 50),
   });
 
-  const filtered = activeFilter === "all"
-    ? tools
-    : tools.filter(t => (t.feature_tags || []).includes(activeFilter));
+  const filtered =
+    activeFilter === "all" ? tools : tools.filter((t) => (t.feature_tags || []).includes(activeFilter));
 
   return (
     <div>
+      <SEO
+        title="All Mobile Detailing Tools & Software"
+        description="Browse the complete 2026 directory of software, business tools, and equipment for mobile car detailing. Filter by feature and compare alternatives."
+        canonical="/tools"
+      />
+
       <Breadcrumbs items={[{ label: "All Tools" }]} />
 
       <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
-          All Tools & Software for Mobile Detailing
-        </h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">All Tools & Software for Mobile Detailing (2026)</h1>
         <p className="text-gray-400 text-lg max-w-3xl">
           Browse our complete directory of software, tools, and equipment for mobile car detailing businesses.
           Filter by feature to find exactly what you need.
@@ -41,18 +45,20 @@ export default function Compare() {
 
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {Array(6).fill(0).map((_, i) => (
-            <div key={i} className="bg-[#181b23] border border-[#2a2e3b] rounded-2xl p-6 animate-pulse">
-              <div className="w-12 h-12 rounded-xl bg-[#2a2e3b] mb-4" />
-              <div className="h-5 bg-[#2a2e3b] rounded w-1/2 mb-2" />
-              <div className="h-4 bg-[#2a2e3b] rounded w-full mb-4" />
-              <div className="h-4 bg-[#2a2e3b] rounded w-1/3" />
-            </div>
-          ))}
+          {Array(6)
+            .fill(0)
+            .map((_, i) => (
+              <div key={i} className="bg-[#181b23] border border-[#2a2e3b] rounded-2xl p-6 animate-pulse">
+                <div className="w-12 h-12 rounded-xl bg-[#2a2e3b] mb-4" />
+                <div className="h-5 bg-[#2a2e3b] rounded w-1/2 mb-2" />
+                <div className="h-4 bg-[#2a2e3b] rounded w-full mb-4" />
+                <div className="h-4 bg-[#2a2e3b] rounded w-1/3" />
+              </div>
+            ))}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filtered.map(tool => (
+          {filtered.map((tool) => (
             <ToolCard key={tool.slug} tool={tool} showAffiliate={false} />
           ))}
         </div>
@@ -64,12 +70,14 @@ export default function Compare() {
         </div>
       )}
 
-      <InternalLinkBlock links={[
-        { label: "Best Scheduling Software", page: "BestForDetail", params: "feature=scheduling" },
-        { label: "Best CRM Tools", page: "BestForDetail", params: "feature=crm" },
-        { label: "How to Start a Detailing Business", page: "GuideDetail", params: "slug=how-to-start-mobile-detailing-business" },
-        { label: "Jobber vs Housecall Pro", page: "VSDetail", params: "slugs=jobber-vs-housecall-pro" }
-      ]} />
+      <InternalLinkBlock
+        links={[
+          { label: "Best Scheduling Software", page: "BestForDetail", params: "feature=scheduling" },
+          { label: "Best CRM Tools", page: "BestForDetail", params: "feature=crm" },
+          { label: "How to Start a Detailing Business", page: "GuideDetail", params: "slug=how-to-start-mobile-detailing-business" },
+          { label: "Jobber vs Housecall Pro", page: "VSDetail", params: "slugs=jobber-vs-housecall-pro" },
+        ]}
+      />
     </div>
   );
 }

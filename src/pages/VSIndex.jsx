@@ -10,11 +10,12 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { ArrowLeftRight } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import SEO from "@/components/SEO";
 
 export default function VSIndex() {
   const { data: tools = [] } = useQuery({
     queryKey: ["all-tools-vs"],
-    queryFn: () => base44.entities.Tool.list("sort_order", 50)
+    queryFn: () => base44.entities.Tool.list("sort_order", 50),
   });
 
   // Generate all unique pairs (only within overlapping categories/tags)
@@ -23,7 +24,7 @@ export default function VSIndex() {
     for (let j = i + 1; j < tools.length; j++) {
       const a = tools[i];
       const b = tools[j];
-      const sharedTags = (a.feature_tags || []).filter(t => (b.feature_tags || []).includes(t));
+      const sharedTags = (a.feature_tags || []).filter((t) => (b.feature_tags || []).includes(t));
       if (sharedTags.length > 0 || a.category_slug === b.category_slug) {
         pairs.push({ a, b, slug: `${a.slug}-vs-${b.slug}` });
       }
@@ -32,6 +33,12 @@ export default function VSIndex() {
 
   return (
     <div>
+      <SEO
+        title="Tool Comparisons"
+        description="Head-to-head comparisons of software and tools for mobile car detailing in 2026. Compare features, pricing, and who each tool is best for."
+        canonical="/vs"
+      />
+
       <Breadcrumbs items={[{ label: "VS Comparisons" }]} />
       <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">Head-to-Head Comparisons</h1>
       <p className="text-gray-400 text-lg mb-8 max-w-3xl">
@@ -40,7 +47,7 @@ export default function VSIndex() {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {pairs.map(pair => (
+        {pairs.map((pair) => (
           <Link
             key={pair.slug}
             to={createPageUrl(`VSDetail?slugs=${pair.slug}`)}
@@ -63,9 +70,7 @@ export default function VSIndex() {
         ))}
       </div>
 
-      {pairs.length === 0 && (
-        <div className="text-center py-16 text-gray-400">Loading comparisons...</div>
-      )}
+      {pairs.length === 0 && <div className="text-center py-16 text-gray-400">Loading comparisons...</div>}
     </div>
   );
 }

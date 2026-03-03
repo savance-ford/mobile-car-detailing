@@ -8,15 +8,22 @@ import { base44 } from "@/api/base44Client";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GuideCard from "@/components/GuideCard";
 import InternalLinkBlock from "@/components/InternalLinkBlock";
+import SEO from "@/components/SEO";
 
 export default function Guides() {
   const { data: guides = [] } = useQuery({
     queryKey: ["guides"],
-    queryFn: () => base44.entities.Guide.list("sort_order", 50)
+    queryFn: () => base44.entities.Guide.list("sort_order", 50),
   });
 
   return (
     <div>
+      <SEO
+        title="Mobile Detailing Business Guides"
+        description="In-depth 2026 guides for starting, running, and growing a mobile car detailing business — pricing, marketing, software, and workflows."
+        canonical="/guides"
+      />
+
       <Breadcrumbs items={[{ label: "Guides" }]} />
       <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">Detailing Business Guides</h1>
       <p className="text-gray-400 text-lg mb-8 max-w-3xl">
@@ -25,16 +32,18 @@ export default function Guides() {
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {guides.map(g => (
+        {guides.map((g) => (
           <GuideCard key={g.slug} guide={g} />
         ))}
       </div>
 
-      <InternalLinkBlock links={[
-        { label: "Browse All Tools", page: "Compare" },
-        { label: "Best Scheduling Software", page: "BestForDetail", params: "feature=scheduling" },
-        { label: "All Categories", page: "Categories" }
-      ]} />
+      <InternalLinkBlock
+        links={[
+          { label: "Browse All Tools", page: "Compare" },
+          { label: "Best Scheduling Software", page: "BestForDetail", params: "feature=scheduling" },
+          { label: "All Categories", page: "Categories" },
+        ]}
+      />
     </div>
   );
 }

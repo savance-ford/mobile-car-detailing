@@ -1,40 +1,42 @@
-# DetailerStack (Standalone)
+# DetailerStack (Vite + React)
 
-This is a **Vite + React** project for an affiliate-style directory of software/tools for **mobile car detailing**.
+A **public, SEO-focused** affiliate site for mobile car detailing software, tools, and equipment.
 
-It was originally generated with Base44, but this version has been rebuilt to run **without Base44**.
+## What's changed (2026 update)
+- ✅ **No auth / no Base44 backend dependency** (runs locally + on any static host).
+- ✅ **SEO-friendly routes**:
+  - `/tools`, `/tools/:slug`
+  - `/categories`, `/categories/:slug`
+  - `/guides`, `/guides/:slug`
+  - `/best-for`, `/best-for/:feature`
+  - `/vs`, `/vs/:slugs`
+  - `/affiliate-disclosure`, `/privacy`, `/terms`
+- ✅ Legacy Base44 routes (e.g. `/ToolDetail?slug=jobber`) **redirect** to canonical routes.
+- ✅ Local data lives in `src/data/mockData.js` and powers the site.
+- ✅ `robots.txt` + `sitemap.xml` included in `/public`.
+- ✅ `vercel.json` and `public/_redirects` included for SPA deep-link support.
 
 ## Quick start
-
 ```bash
 npm install
 npm run dev
 ```
 
-Vite will print a local URL such as:
-
+## Configure your domain (important for SEO)
+Set your real domain in `.env.local`:
+```bash
+VITE_SITE_URL=https://yourdomain.com
 ```
-Local:   http://localhost:5173/
-```
+This affects canonical URLs, JSON-LD, and affiliate link placeholders.
 
-Open that URL in your browser.
+## Replace affiliate links
+In `src/data/mockData.js`, replace each tool’s `affiliate_url` with your real tracking link.
 
-## Data
+## Deploy notes
+Because this is a single-page app, your host must rewrite unknown routes to `/index.html`.
+- **Netlify**: `public/_redirects` is included.
+- **Vercel**: `vercel.json` is included.
 
-All content currently comes from local mock data:
-
-- `src/data/mockData.js`
-
-If you want to connect a real backend later, replace the in-memory client in:
-
-- `src/api/base44Client.js`
-
-The pages expect a simple API shape:
-
-- `base44.entities.Tool.list(sortField, limit)`
-- `base44.entities.Tool.filter(criteria, sortField, limit)`
-
-## Notes
-
-- This app uses **React Router** for page routing.
-- It uses **@tanstack/react-query** for data fetching/caching (even though data is local right now).
+## SEO note
+Client-rendered sites can still rank, but for "best possible" SEO you may eventually want SSR (e.g. Next.js).
+This project still includes strong on-page SEO (clean URLs, meta tags, JSON-LD, sitemap, internal linking).

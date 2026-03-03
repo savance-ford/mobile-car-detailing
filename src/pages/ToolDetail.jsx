@@ -1,7 +1,8 @@
 /**
  * ToolDetail - Individual tool review page
- * SEO: Deep content page with structured data, FAQs, pros/cons, and internal links.
- * Route: ?slug=jobber
+ * SEO: Deep content page with FAQs, pros/cons, pricing notes, and internal links.
+ * Route (SEO): /tools/:slug
+ * Legacy: /ToolDetail?slug=...
  */
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -9,46 +10,80 @@ import { base44 } from "@/api/base44Client";
 import { createPageUrl } from "@/utils";
 import ReactMarkdown from "react-markdown";
 import { ThumbsUp, ThumbsDown, DollarSign } from "lucide-react";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ToolHero from "@/components/ToolHero";
 import FAQ from "@/components/FAQ";
 import RelatedTools from "@/components/RelatedTools";
 import InternalLinkBlock from "@/components/InternalLinkBlock";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
+import SEO from "@/components/SEO";
+
+function safeDesc(text) {
+  const s = String(text || "").replace(/\s+/g, " ").trim();
+  return s.length > 170 ? `${s.slice(0, 167)}...` : s;
+}
 
 export default function ToolDetail() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const slug = urlParams.get("slug");
+  const { slug: slugParam } = useParams();
+  const location = useLocation();
+  const urlParams = new URLSearchParams(location.search);
+  const slug = slugParam || urlParams.get("slug") || "";
 
   const { data: tools = [] } = useQuery({
     queryKey: ["tool", slug],
-    queryFn: () => base44.entities.Tool.filter({ slug })
+    queryFn: () => base44.entities.Tool.filter({ slug }),
+    enabled: !!slug,
   });
   const tool = tools[0];
 
   const { data: allTools = [] } = useQuery({
     queryKey: ["all-tools-for-related"],
-    queryFn: () => base44.entities.Tool.list("sort_order", 50)
+    queryFn: () => base44.entities.Tool.list("sort_order", 50),
   });
 
-  // Find related tools (same category or overlapping feature tags)
-  const related = allTools.filter(t =>
-    t.slug !== slug && (
-      t.category_slug === tool?.category_slug ||
-      (t.feature_tags || []).some(tag => (tool?.feature_tags || []).includes(tag))
-    )
-  );
+  if (!slug) {
+    return <div className="text-center py-20 text-gray-400">Missing tool slug.</div>;
+  }
 
   if (!tool) {
     return <div className="text-center py-20 text-gray-400">Loading tool review...</div>;
   }
 
+  // Find related tools (same category or overlapping feature tags)
+  const related = allTools.filter(
+    (t) =>
+      t.slug !== slug &&
+      (t.category_slug === tool?.category_slug ||
+        (t.feature_tags || []).some((tag) => (tool?.feature_tags || []).includes(tag)))
+  );
+
+  const pageTitle = `${tool.name} Review (2026)`;
+
   return (
     <div>
-      <Breadcrumbs items={[
-        { label: "Tools", href: createPageUrl("Compare") },
-        { label: tool.name }
-      ]} />
+      <SEO
+        title={pageTitle}
+        description={safeDesc(tool.short_description)}
+        canonical={`/tools/${tool.slug}`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: tool.name,
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web",
+          description: tool.short_description,
+          url: `/tools/${tool.slug}`,
+        }}
+        jsonLdId="jsonld-tool"
+      />
+
+      <Breadcrumbs
+        items={[
+          { label: "Tools", href: createPageUrl("Compare") },
+          { label: tool.name },
+        ]}
+      />
 
       {/* Hero */}
       <ToolHero tool={tool} />
@@ -62,12 +97,12 @@ export default function ToolDetail() {
             <div className="prose-dark leading-relaxed text-gray-300">
               <ReactMarkdown
                 components={{
-                  h2: ({children}) => <h2 className="text-xl font-bold text-white mt-8 mb-4">{children}</h2>,
-                  h3: ({children}) => <h3 className="text-lg font-semibold text-white mt-6 mb-3">{children}</h3>,
-                  p: ({children}) => <p className="mb-4 leading-relaxed">{children}</p>,
-                  strong: ({children}) => <strong className="text-white font-semibold">{children}</strong>,
-                  ul: ({children}) => <ul className="list-disc pl-6 mb-4 space-y-1">{children}</ul>,
-                  li: ({children}) => <li className="text-gray-400">{children}</li>,
+                  h2: ({ children }) => <h2 className="text-xl font-bold text-white mt-8 mb-4">{children}</h2>,
+                  h3: ({ children }) => <h3 className="text-lg font-semibold text-white mt-6 mb-3">{children}</h3>,
+                  p: ({ children }) => <p className="mb-4 leading-relaxed">{children}</p>,
+                  strong: ({ children }) => <strong className="text-white font-semibold">{children}</strong>,
+                  ul: ({ children }) => <ul className="list-disc pl-6 mb-4 space-y-1">{children}</ul>,
+                  li: ({ children }) => <li className="text-gray-400">{children}</li>,
                 }}
               >
                 {tool.long_description}
@@ -138,16 +173,22 @@ export default function ToolDetail() {
               <div>
                 <dt className="text-xs text-gray-500 uppercase">Category</dt>
                 <dd className="text-sm text-gray-300 mt-1">
-                  <a href={createPageUrl(`CategoryDetail?slug=${tool.category_slug}`)} className="text-indigo-400 hover:underline">
+                  <Link
+                    to={createPageUrl(`CategoryDetail?slug=${tool.category_slug}`)}
+                    className="text-indigo-400 hover:underline"
+                  >
                     {tool.category_slug?.replace(/-/g, " ")}
-                  </a>
+                  </Link>
                 </dd>
               </div>
               <div>
                 <dt className="text-xs text-gray-500 uppercase">All Features</dt>
                 <dd className="flex flex-wrap gap-1.5 mt-2">
-                  {(tool.features || []).map(f => (
-                    <span key={f} className="text-xs px-2 py-0.5 rounded bg-[#1f2330] text-gray-400 border border-[#2a2e3b]">
+                  {(tool.features || []).map((f) => (
+                    <span
+                      key={f}
+                      className="text-xs px-2 py-0.5 rounded bg-[#1f2330] text-gray-400 border border-[#2a2e3b]"
+                    >
                       {f}
                     </span>
                   ))}
@@ -165,12 +206,14 @@ export default function ToolDetail() {
       <RelatedTools tools={related} exclude={slug} title={`Alternatives to ${tool.name}`} />
 
       {/* Internal Links */}
-      <InternalLinkBlock links={[
-        { label: "Compare All Tools", page: "Compare" },
-        { label: "Best Scheduling Software", page: "BestForDetail", params: "feature=scheduling" },
-        { label: "Start a Detailing Business Guide", page: "GuideDetail", params: "slug=how-to-start-mobile-detailing-business" },
-        { label: "Jobber vs Housecall Pro", page: "VSDetail", params: "slugs=jobber-vs-housecall-pro" }
-      ]} />
+      <InternalLinkBlock
+        links={[
+          { label: "Compare All Tools", page: "Compare" },
+          { label: "Best Scheduling Software", page: "BestForDetail", params: "feature=scheduling" },
+          { label: "Start a Detailing Business Guide", page: "GuideDetail", params: "slug=how-to-start-mobile-detailing-business" },
+          { label: "Jobber vs Housecall Pro", page: "VSDetail", params: "slugs=jobber-vs-housecall-pro" },
+        ]}
+      />
 
       {/* Sticky Mobile CTA */}
       <StickyMobileCTA tool={tool} />

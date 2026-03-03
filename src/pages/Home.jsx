@@ -3,7 +3,7 @@
  * SEO: Primary landing page with strong intro, category overview, featured tools, and FAQs.
  * Internal linking: Links to categories, tools, guides, and comparisons.
  */
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import { Link } from "react-router-dom";
@@ -15,38 +15,72 @@ import GuideCard from "@/components/GuideCard";
 import FAQ from "@/components/FAQ";
 import TrustSection from "@/components/TrustSection";
 import InternalLinkBlock from "@/components/InternalLinkBlock";
+import SEO from "@/components/SEO";
 
 const homeFAQs = [
-  { question: "What software does a mobile car detailing business need?", answer: "At minimum, you need scheduling software (like Jobber or Housecall Pro), a payment processor (Square or Stripe), accounting software (QuickBooks), and a way to manage clients. As you grow, add marketing automation, CRM, and specialized detailing software." },
-  { question: "What's the best all-in-one software for mobile detailers?", answer: "Jobber and Housecall Pro are the top all-in-one solutions, offering scheduling, invoicing, CRM, and payment processing. For detailing-specific features, MobileTech RX is the industry standard." },
-  { question: "How much should I budget for business software?", answer: "Most solo mobile detailers spend $50-$150/month on essential software. This typically covers scheduling ($40-65), accounting ($30), and payment processing (per-transaction fees). Costs increase as you add team members and marketing tools." },
-  { question: "Do I need detailing-specific software?", answer: "Not necessarily. General field service tools like Jobber work great. However, detailing-specific tools like MobileTech RX offer features like vehicle condition reports and detailing package management that can set you apart professionally." },
-  { question: "What equipment do I need to start mobile detailing?", answer: "Essential startup equipment includes a pressure washer, dual-action polisher, vacuum/extractor, wash supplies, microfiber towels, and a reliable vehicle. Budget $2,000-$5,000 for a basic professional setup." }
+  {
+    question: "What software does a mobile car detailing business need?",
+    answer:
+      "At minimum, you need scheduling software (like Jobber or Housecall Pro), a payment processor (Square or Stripe), accounting software (QuickBooks), and a way to manage clients. As you grow, add marketing automation, CRM, and specialized detailing software.",
+  },
+  {
+    question: "What's the best all-in-one software for mobile detailers?",
+    answer:
+      "Jobber and Housecall Pro are top all-in-one solutions, offering scheduling, invoicing, CRM, and payment workflows. For detailing-specific features, MobileTech RX is a well-known industry option.",
+  },
+  {
+    question: "How much should I budget for business software?",
+    answer:
+      "Most solo mobile detailers spend roughly $50–$150/month on essential software in 2026. This often covers scheduling, accounting, and payment processing. Costs increase as you add team members and marketing tools.",
+  },
+  {
+    question: "Do I need detailing-specific software?",
+    answer:
+      "Not necessarily. General field service tools like Jobber work great. However, detailing-specific tools can add inspections, vehicle history, and package management that boosts professionalism and upsells.",
+  },
+  {
+    question: "What equipment do I need to start mobile detailing?",
+    answer:
+      "Essential startup equipment includes a pressure washer, dual-action polisher, vacuum/extractor, wash supplies, microfiber towels, and a reliable vehicle. Many operators budget $2,000–$5,000 for a basic professional setup.",
+  },
 ];
 
 export default function Home() {
   const { data: categories = [] } = useQuery({
     queryKey: ["categories"],
-    queryFn: () => base44.entities.Category.list("sort_order", 10)
+    queryFn: () => base44.entities.Category.list("sort_order", 10),
   });
 
   const { data: featuredTools = [] } = useQuery({
     queryKey: ["featured-tools"],
-    queryFn: () => base44.entities.Tool.filter({ is_featured: true }, "sort_order", 6)
+    queryFn: () => base44.entities.Tool.filter({ is_featured: true }, "sort_order", 6),
   });
 
   const { data: guides = [] } = useQuery({
     queryKey: ["guides"],
-    queryFn: () => base44.entities.Guide.list("sort_order", 3)
+    queryFn: () => base44.entities.Guide.list("sort_order", 3),
   });
 
   return (
     <div>
+      <SEO
+        title="Mobile Car Detailing Software, Tools & Equipment"
+        description="Compare the best software, business tools, and equipment for mobile car detailing in 2026. Reviews, pricing, pros/cons, and alternatives."
+        canonical="/"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "DetailerStack",
+          url: "/",
+        }}
+        jsonLdId="jsonld-website"
+      />
+
       {/* Hero Section */}
       <section className="text-center py-16 md:py-24">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-medium mb-6">
           <Sparkles className="w-4 h-4" />
-          The #1 Resource for Mobile Detailing Businesses
+          2026 Resource Hub for Mobile Detailers
         </div>
         <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight max-w-4xl mx-auto mb-6">
           Software, Tools & Equipment for{" "}
@@ -78,8 +112,8 @@ export default function Home() {
       <section className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
         {[
           { icon: Zap, title: "Expert Reviews", desc: "In-depth analysis of every tool from a mobile detailing perspective." },
-          { icon: Shield, title: "Honest Comparisons", desc: "Side-by-side comparisons with real pros, cons, and pricing details." },
-          { icon: TrendingUp, title: "Growth Focused", desc: "Tools and strategies to scale from solo operation to thriving business." }
+          { icon: Shield, title: "Honest Comparisons", desc: "Side-by-side comparisons with clear pros, cons, and pricing details." },
+          { icon: TrendingUp, title: "Growth Focused", desc: "Tools and strategies to scale from solo operation to thriving business." },
         ].map((item, i) => (
           <div key={i} className="bg-[#181b23] border border-[#2a2e3b] rounded-2xl p-6 text-center">
             <div className="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center mx-auto mb-3">
@@ -111,7 +145,7 @@ export default function Home() {
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {featuredTools.map(tool => (
+          {featuredTools.map((tool) => (
             <ToolCard key={tool.slug} tool={tool} />
           ))}
         </div>
@@ -127,8 +161,8 @@ export default function Home() {
             { a: "Square", b: "Stripe", slug: "square-vs-stripe" },
             { a: "Mailchimp", b: "ActiveCampaign", slug: "mailchimp-vs-activecampaign" },
             { a: "Chemical Guys", b: "Meguiar's", slug: "chemical-guys-vs-meguiars" },
-            { a: "PocketSuite", b: "Jobber", slug: "pocketsuite-vs-jobber" }
-          ].map(c => (
+            { a: "PocketSuite", b: "Jobber", slug: "pocketsuite-vs-jobber" },
+          ].map((c) => (
             <Link
               key={c.slug}
               to={createPageUrl(`VSDetail?slugs=${c.slug}`)}
@@ -162,7 +196,7 @@ export default function Home() {
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {guides.map(g => (
+          {guides.map((g) => (
             <GuideCard key={g.slug} guide={g} />
           ))}
         </div>
@@ -175,14 +209,16 @@ export default function Home() {
       <FAQ items={homeFAQs} />
 
       {/* Internal Links */}
-      <InternalLinkBlock links={[
-        { label: "Best Scheduling Software for Detailers", page: "BestForDetail", params: "feature=scheduling" },
-        { label: "Best CRM for Mobile Detailing", page: "BestForDetail", params: "feature=crm" },
-        { label: "Best Invoicing Tools", page: "BestForDetail", params: "feature=invoicing" },
-        { label: "Best Payment Systems", page: "BestForDetail", params: "feature=payment" },
-        { label: "Jobber vs Housecall Pro", page: "VSDetail", params: "slugs=jobber-vs-housecall-pro" },
-        { label: "Compare All Tools", page: "Compare" }
-      ]} />
+      <InternalLinkBlock
+        links={[
+          { label: "Best Scheduling Software for Detailers", page: "BestForDetail", params: "feature=scheduling" },
+          { label: "Best CRM for Mobile Detailing", page: "BestForDetail", params: "feature=crm" },
+          { label: "Best Invoicing Tools", page: "BestForDetail", params: "feature=invoicing" },
+          { label: "Best Payment Systems", page: "BestForDetail", params: "feature=payment" },
+          { label: "Jobber vs Housecall Pro", page: "VSDetail", params: "slugs=jobber-vs-housecall-pro" },
+          { label: "Compare All Tools", page: "Compare" },
+        ]}
+      />
     </div>
   );
 }

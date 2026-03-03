@@ -1,83 +1,92 @@
 /**
- * Local mock content
+ * mockData.js
  *
- * Replace this file with:
- * - real affiliate data (CMS, database)
- * - or an API layer (REST/GraphQL)
+ * Local 2026-ready dataset.
  *
- * The app pages expect Base44-style entities with these fields.
+ * Why this exists:
+ * - Makes the site work locally + on any static host without the Base44 backend.
+ * - Keeps everything crawlable with stable, SEO-friendly URLs.
+ *
+ * IMPORTANT:
+ * - Replace affiliate_url values with your real affiliate tracking links.
+ * - Set VITE_SITE_URL in .env(.local) when you know your real domain.
  */
+
+export const SITE = {
+  name: "DetailerStack",
+  tagline: "Software, tools & equipment for mobile car detailing (2026)",
+  // Use your real domain when deployed.
+  baseUrl: (typeof import.meta !== "undefined" && import.meta.env?.VITE_SITE_URL) || "https://example.com",
+  defaultOgImage: "/og-default.png",
+};
+
+const aff = (slug) => `${SITE.baseUrl.replace(/\/$/, "")}/go/${slug}?utm_source=detailerstack&utm_medium=affiliate&utm_campaign=2026`;
 
 export const categories = [
   {
     name: "Software & Business Tools",
     slug: "software-business-tools",
-    description: "Scheduling, CRM, invoicing, and operations tools built for service businesses.",
-    icon: "Wrench",
+    description:
+      "Scheduling, invoicing, CRM, payments, and accounting tools that keep a mobile detailing business organized and profitable in 2026.",
+    icon: "BarChart3",
     sort_order: 1,
   },
   {
     name: "Detailing & Auto Software",
     slug: "detailing-auto-software",
-    description: "Detailing-specific platforms for inspections, packages, and customer experience.",
+    description:
+      "Detailing-specific platforms for inspections, packages, upsells, and vehicle workflows — built for detailers, not generic jobs.",
     icon: "Car",
     sort_order: 2,
   },
   {
-    name: "Payments & Accounting",
-    slug: "payments-accounting",
-    description: "Payment processors and accounting tools to get paid faster and stay organized.",
-    icon: "CreditCard",
-    sort_order: 3,
-  },
-  {
     name: "Marketing & Customer Acquisition",
     slug: "marketing-customer-acquisition",
-    description: "Email, automation, and marketing tools to grow bookings and repeat clients.",
+    description:
+      "Email, automation, landing pages, and CRM tools to help mobile detailers win more repeat customers and referrals in 2026.",
     icon: "Megaphone",
-    sort_order: 4,
+    sort_order: 3,
   },
   {
     name: "Equipment & Supplies",
     slug: "equipment-supplies",
-    description: "Chemicals, tools, and suppliers trusted by professional detailers.",
-    icon: "Package",
-    sort_order: 5,
-  },
-  {
-    name: "Automation & Analytics",
-    slug: "automation-analytics",
-    description: "Connect your tools, automate workflows, and track performance.",
-    icon: "BarChart3",
-    sort_order: 6,
+    description:
+      "Chemicals, pads, towels, and suppliers used by mobile detailers to deliver consistent results on every job.",
+    icon: "Wrench",
+    sort_order: 4,
   },
 ];
 
 export const tools = [
-  // --- Field service / operations ---
+  // --- Field Service / Ops ---
   {
     name: "Jobber",
     slug: "jobber",
     category_slug: "software-business-tools",
-    short_description: "All-in-one field service software for scheduling, invoicing, and client management.",
-    long_description: `## Jobber review (for mobile detailers)\n\nJobber is a top choice for mobile detailing businesses that want a clean, professional customer experience. It covers scheduling, dispatching, quotes, invoices, and client management in one place.\n\n### Why detailers like it\n- Online booking + reminders\n- Mobile-friendly invoicing\n- Job notes + internal team communication\n\n### Bottom line\nIf you want a polished “service business” workflow that feels legit to customers, Jobber is a safe bet.`,
-    affiliate_url: "https://example.com/aff/jobber",
-    pricing_starts_at: "$49/mo",
-    pricing_details: "Plans vary by team size. Expect $49–$249+/month depending on features.",
+    short_description:
+      "All-in-one field service platform for scheduling, invoicing, CRM, and client communication — a top pick for mobile detailers in 2026.",
+    long_description:
+      "## Jobber review (2026)\n\nJobber is a strong all-in-one system for mobile detailers who want **scheduling, invoicing, and a simple CRM** without a complicated setup.\n\n### Why detailers like it\n- Online booking and fast quote → invoice workflows\n- Automated reminders to reduce no-shows\n- Clean mobile experience when you're on the road\n\n### Who it's best for\nSolo operators and small teams that want a polished customer experience and reliable back-office basics.",
+    affiliate_url: aff("jobber"),
+    pricing_starts_at: "$29/mo",
+    pricing_details:
+      "Expect starter plans in the $20–$40/mo range, with higher tiers adding automation, reporting, and multi-user workflows.",
     rating: 4.7,
-    features: ["Online booking", "Route scheduling", "Quotes & invoices", "Client CRM", "Automated reminders"],
-    pros: ["Excellent UX", "Strong scheduling + invoicing", "Great for teams"],
-    cons: ["Can get pricey as you scale", "Some advanced automation requires integrations"],
-    best_for: "Mobile detailers who want scheduling + invoicing + a professional customer experience",
-    feature_tags: ["scheduling", "crm", "invoicing", "automation"],
+    best_for: "Solo and small teams who want scheduling + invoicing + CRM in one place.",
+    features: ["Online booking", "Scheduling", "Quotes", "Invoicing", "Client CRM"],
+    feature_tags: ["scheduling", "invoicing", "crm", "automation"],
+    pros: ["Fast setup", "Great mobile UX", "Strong invoicing workflow"],
+    cons: ["Not detailing-specific", "Costs rise as you add users"],
     faqs: [
       {
-        question: "Is Jobber good for a solo mobile detailer?",
-        answer: "Yes—especially if you want online booking and professional invoices. Many solo operators start here and grow into team plans.",
+        question: "Is Jobber good for mobile detailing?",
+        answer:
+          "Yes. Jobber covers scheduling, invoicing, and client management well for service businesses — a great fit for mobile detailers who want an all-in-one system.",
       },
       {
-        question: "Does Jobber support payments?",
-        answer: "Jobber supports online payments and can integrate with payment tools depending on your setup.",
+        question: "Does Jobber handle online booking?",
+        answer:
+          "Yes. Many plans include online booking and appointment reminders.",
       },
     ],
     is_featured: true,
@@ -87,21 +96,25 @@ export const tools = [
     name: "Housecall Pro",
     slug: "housecall-pro",
     category_slug: "software-business-tools",
-    short_description: "Field service platform with online booking, estimates, scheduling, and payments.",
-    long_description: `## Housecall Pro review\n\nHousecall Pro is another leading field service tool that works well for mobile detailing—especially if you run a small team and want marketing + automation features baked in.\n\n### Highlights\n- Online booking\n- Automated follow-ups\n- Estimates → invoices\n\n### Bottom line\nIf you want an all-in-one platform with strong automation and “business ops” features, Housecall Pro is a strong contender.`,
-    affiliate_url: "https://example.com/aff/housecall-pro",
-    pricing_starts_at: "$59/mo",
-    pricing_details: "Pricing depends on users and features. Plans typically start around $59/month.",
+    short_description:
+      "Popular field service suite with scheduling, invoicing, payments, and automation — strong for teams and growing detail shops.",
+    long_description:
+      "## Housecall Pro review (2026)\n\nHousecall Pro is built for service businesses that want an operational hub: **dispatching, scheduling, invoicing, and payments** with automation layers.\n\n### Great for growth\nIf you're adding techs, routes, or multiple vans, Housecall Pro can keep operations consistent.",
+    affiliate_url: aff("housecall-pro"),
+    pricing_starts_at: "$49/mo",
+    pricing_details:
+      "Starter pricing varies by promotions and tiers. Expect higher tiers if you need deeper automation and team features.",
     rating: 4.6,
-    features: ["Online booking", "Estimates", "Scheduling", "Invoicing", "Automations"],
-    pros: ["Strong automation", "Good for teams", "Solid customer communications"],
-    cons: ["Some features cost extra", "Setup takes time"],
-    best_for: "Detailers who want an all-in-one platform with automation",
-    feature_tags: ["scheduling", "crm", "invoicing", "payment", "automation"],
+    best_for: "Growing teams that need scheduling + payments + automation.",
+    features: ["Scheduling", "Dispatch", "Invoicing", "Payments", "Automations"],
+    feature_tags: ["scheduling", "invoicing", "payment", "automation", "crm"],
+    pros: ["Solid automation", "Good for teams", "Payments + invoicing integrated"],
+    cons: ["Can feel heavy for solo operators", "Feature access varies by tier"],
     faqs: [
       {
-        question: "Does Housecall Pro work for mobile businesses?",
-        answer: "Yes. It’s designed for field service businesses and works well for on-the-go operations.",
+        question: "Is Housecall Pro better than Jobber?",
+        answer:
+          "It depends. Housecall Pro tends to shine for teams and automation-heavy workflows; Jobber often wins on simplicity and speed for solo operators.",
       },
     ],
     is_featured: true,
@@ -111,17 +124,20 @@ export const tools = [
     name: "PocketSuite",
     slug: "pocketsuite",
     category_slug: "software-business-tools",
-    short_description: "Client management + scheduling built for solo service pros.",
-    long_description: `## PocketSuite review\n\nPocketSuite is a simpler option that can fit solo mobile detailers who want quick scheduling and client communication without a heavy setup.`,
-    affiliate_url: "https://example.com/aff/pocketsuite",
+    short_description:
+      "Lightweight scheduling + payments + messaging for solo operators. Great if you want something simpler than full field-service suites.",
+    long_description:
+      "## PocketSuite review (2026)\n\nPocketSuite is a streamlined option for solo mobile detailers who want **booking, payments, and client messaging** without a complex setup.",
+    affiliate_url: aff("pocketsuite"),
     pricing_starts_at: "$19/mo",
-    pricing_details: "Starter plans are budget-friendly; advanced features cost more.",
+    pricing_details:
+      "Often positioned as an affordable solo-operator tool with upgrades for additional features.",
     rating: 4.4,
-    features: ["Client CRM", "Booking", "Payments", "Messaging"],
-    pros: ["Simple", "Affordable", "Good for solo operators"],
-    cons: ["Less robust than Jobber/HCP", "Fewer advanced features"],
-    best_for: "Solo mobile detailers who want a lightweight setup",
-    feature_tags: ["scheduling", "crm", "payment"],
+    best_for: "Solo operators who want simple scheduling + payments.",
+    features: ["Scheduling", "Client messaging", "Payments", "Online booking"],
+    feature_tags: ["scheduling", "payment", "crm"],
+    pros: ["Simple UI", "Good for solo", "Fast setup"],
+    cons: ["Less robust for teams", "Fewer advanced automations"],
     faqs: [],
     is_featured: false,
     sort_order: 3,
@@ -132,43 +148,44 @@ export const tools = [
     name: "MobileTech RX",
     slug: "mobiletech-rx",
     category_slug: "detailing-auto-software",
-    short_description: "Detailing-specific CRM with inspections, packages, and professional reports.",
-    long_description: `## MobileTech RX review\n\nMobileTech RX is widely known in the detailing space for helping detailers create professional workflows, inspection reports, and packages that feel premium to customers.\n\n### Great for\n- Condition reports\n- Package + upsell management\n- Detailing-focused client history\n\n### Bottom line\nIf you want industry-specific tools (not generic field service software), MobileTech RX is the standard.`,
-    affiliate_url: "https://example.com/aff/mobiletech-rx",
-    pricing_starts_at: "$35/mo",
-    pricing_details: "Pricing varies by plan and features. Many detailers start on entry plans and upgrade.",
+    short_description:
+      "Detailing-specific software with packages, inspections, and upsells — the industry standard for professional detailing workflows.",
+    long_description:
+      "## MobileTech RX review (2026)\n\nMobileTech RX is one of the most recognized detailing platforms for **package building, inspections, and upsells**.\n\nIf you want a system designed around vehicles and detailing services (not generic jobs), this is a top option.",
+    affiliate_url: aff("mobiletech-rx"),
+    pricing_starts_at: "$29/mo",
+    pricing_details:
+      "Pricing depends on plan and team size. Many detailers justify the cost through higher average ticket size from inspections/upsells.",
     rating: 4.5,
-    features: ["Vehicle inspections", "Condition reports", "Service packages", "Client history"],
-    pros: ["Detailing-specific", "Professional reports", "Great upsell workflow"],
-    cons: ["Not as broad as Jobber", "Some features require training"],
-    best_for: "Detailers who want detailing-specific workflows",
-    feature_tags: ["detailing-specific", "crm", "invoicing"],
-    faqs: [
-      {
-        question: "Do I still need Jobber if I use MobileTech RX?",
-        answer: "Some businesses use both: MobileTech RX for inspections/packages, and a field service tool for scheduling and dispatch.",
-      },
-    ],
+    best_for: "Detailers who want detailing-native workflows (packages, inspections, upsells).",
+    features: ["Detailing packages", "Vehicle inspections", "Upsells", "Invoices", "Client history"],
+    feature_tags: ["detailing-specific", "crm", "invoicing", "automation"],
+    pros: ["Built for detailing", "Great for upsells", "Professional inspection flow"],
+    cons: ["Can be overkill for brand-new solo operators", "Learning curve"],
+    faqs: [],
     is_featured: true,
     sort_order: 4,
   },
 
-  // --- Payments & accounting ---
+  // --- Payments / Accounting ---
   {
     name: "Square",
     slug: "square",
-    category_slug: "payments-accounting",
-    short_description: "Simple payment processing with POS options and invoicing.",
-    long_description: `## Square review\n\nSquare is a practical choice for mobile detailers who need to accept card payments on-site and send invoices. It’s fast to set up and easy for customers.`,
-    affiliate_url: "https://example.com/aff/square",
-    pricing_starts_at: "2.6% + 10¢",
-    pricing_details: "Pricing depends on transaction type. Many mobile operators start with basic card processing.",
+    category_slug: "software-business-tools",
+    short_description:
+      "Easy card payments, invoices, and POS — ideal for mobile detailers who want fast on-site checkout in 2026.",
+    long_description:
+      "## Square review (2026)\n\nSquare is a go-to for **card payments on the spot**, plus invoices and simple customer tracking.",
+    affiliate_url: aff("square"),
+    pricing_starts_at: "Free + processing fees",
+    pricing_details:
+      "Most Square products have no monthly fee; you typically pay transaction processing fees and optional add-ons.",
     rating: 4.6,
-    features: ["Card reader", "Invoices", "Tap-to-pay", "POS options"],
-    pros: ["Quick setup", "Works great on mobile", "Widely trusted"],
-    cons: ["Fees add up at high volume", "Some accounts get holds"],
-    best_for: "Mobile detailers who want simple on-site payments",
+    best_for: "Mobile payments + simple invoicing.",
+    features: ["Card reader", "Invoices", "Payment links", "Basic customer directory"],
     feature_tags: ["payment", "invoicing"],
+    pros: ["Fast setup", "Trusted brand", "Great on-site checkout"],
+    cons: ["Fees can add up", "Limited advanced CRM"],
     faqs: [],
     is_featured: true,
     sort_order: 5,
@@ -176,173 +193,294 @@ export const tools = [
   {
     name: "Stripe",
     slug: "stripe",
-    category_slug: "payments-accounting",
-    short_description: "Developer-friendly payments for invoices, subscriptions, and online checkout.",
-    long_description: `## Stripe review\n\nStripe is powerful if you run more online payments, subscriptions (memberships), or custom checkout flows. It’s less “plug-and-play” than Square, but extremely flexible.`,
-    affiliate_url: "https://example.com/aff/stripe",
-    pricing_starts_at: "2.9% + 30¢",
-    pricing_details: "Pricing varies by payment method and region.",
-    rating: 4.4,
-    features: ["Online checkout", "Invoices", "Subscriptions", "Payment links"],
-    pros: ["Flexible", "Great APIs", "Strong global support"],
-    cons: ["More technical", "Setup can be complex"],
-    best_for: "Detailers taking more online payments or building custom systems",
-    feature_tags: ["payment", "invoicing"],
+    category_slug: "software-business-tools",
+    short_description:
+      "Developer-friendly payments for invoices, subscriptions, and checkout. Best if you're building custom workflows.",
+    long_description:
+      "## Stripe review (2026)\n\nStripe is powerful if you want **custom payment flows**, subscriptions, or deeper integrations with your website/app.",
+    affiliate_url: aff("stripe"),
+    pricing_starts_at: "Processing fees",
+    pricing_details:
+      "Stripe generally charges per-transaction fees; exact pricing depends on your products and region.",
+    rating: 4.5,
+    best_for: "Custom checkout + automation built into your website.",
+    features: ["Online checkout", "Invoices", "Subscriptions", "API integrations"],
+    feature_tags: ["payment", "automation"],
+    pros: ["Highly flexible", "Great docs", "Strong developer ecosystem"],
+    cons: ["Not beginner-friendly", "Requires setup work"],
     faqs: [],
     is_featured: false,
     sort_order: 6,
   },
   {
-    name: "QuickBooks",
-    slug: "quickbooks",
-    category_slug: "payments-accounting",
-    short_description: "Accounting software for bookkeeping, invoices, and tax-ready reports.",
-    long_description: `## QuickBooks review\n\nQuickBooks is a common pick for small service businesses that want clean bookkeeping and tax reporting. Many detailers use it alongside their scheduling tool.`,
-    affiliate_url: "https://example.com/aff/quickbooks",
+    name: "QuickBooks Online",
+    slug: "quickbooks-online",
+    category_slug: "software-business-tools",
+    short_description:
+      "Accounting standard for small businesses: invoicing, expenses, mileage, and tax-ready reporting.",
+    long_description:
+      "## QuickBooks Online review (2026)\n\nIf you want clean books (and less stress at tax time), QuickBooks Online is a common pick for mobile detailers.",
+    affiliate_url: aff("quickbooks-online"),
     pricing_starts_at: "$30/mo",
-    pricing_details: "Plans vary. Choose based on invoicing + bookkeeping needs.",
-    rating: 4.3,
-    features: ["Bookkeeping", "Expense tracking", "Reports", "Invoicing"],
-    pros: ["Industry standard", "Good reporting", "Accountant-friendly"],
-    cons: ["UI can feel busy", "Add-ons increase cost"],
-    best_for: "Detailers who want proper bookkeeping",
+    pricing_details:
+      "Plans vary by features (reporting, inventory, payroll add-ons). Many businesses start on lower tiers and upgrade as needed.",
+    rating: 4.4,
+    best_for: "Bookkeeping and tax-ready reporting.",
+    features: ["Expense tracking", "Invoicing", "Reports", "Bank sync"],
     feature_tags: ["invoicing", "automation"],
+    pros: ["Common accountant-friendly", "Great reporting", "Bank sync"],
+    cons: ["Can get pricey", "UI can feel busy"],
     faqs: [],
     is_featured: false,
     sort_order: 7,
   },
 
-  // --- Marketing ---
+  // --- Marketing / CRM ---
   {
-    name: "Mailchimp",
-    slug: "mailchimp",
+    name: "HighLevel",
+    slug: "highlevel",
     category_slug: "marketing-customer-acquisition",
-    short_description: "Email marketing platform for newsletters, promotions, and customer retention.",
-    long_description: `## Mailchimp review\n\nMailchimp is easy to start with for email marketing—great for sending seasonal promos (winter prep, summer packages) and generating repeat business.`,
-    affiliate_url: "https://example.com/aff/mailchimp",
-    pricing_starts_at: "$0–$13/mo",
-    pricing_details: "Free and paid plans available. Pricing grows with list size.",
-    rating: 4.2,
-    features: ["Email campaigns", "Automations", "Templates", "Audience segments"],
-    pros: ["Beginner-friendly", "Lots of templates", "Quick to launch"],
-    cons: ["Gets expensive with big lists", "Automation depth limited vs advanced tools"],
-    best_for: "Detailers starting email marketing",
-    feature_tags: ["marketing", "email", "automation"],
+    short_description:
+      "All-in-one marketing platform: funnels, email/SMS automation, CRM, and pipelines — great for aggressive growth.",
+    long_description:
+      "## HighLevel review (2026)\n\nHighLevel bundles **funnels, automation, and CRM** into one platform. It's powerful if you're running ads, follow-ups, and want a real pipeline.",
+    affiliate_url: aff("highlevel"),
+    pricing_starts_at: "$97/mo",
+    pricing_details:
+      "Higher tiers add more sub-accounts, advanced features, and agency-style tools.",
+    rating: 4.4,
+    best_for: "Detailers who want automation + funnels + pipeline in one place.",
+    features: ["CRM", "Funnels", "Email/SMS", "Automation", "Pipelines"],
+    feature_tags: ["crm", "marketing", "automation", "email"],
+    pros: ["Very powerful", "Strong automation", "Funnels + CRM together"],
+    cons: ["Learning curve", "Can be overkill for simple needs"],
     faqs: [],
-    is_featured: false,
+    is_featured: true,
     sort_order: 8,
   },
   {
-    name: "ActiveCampaign",
-    slug: "activecampaign",
+    name: "Zoho CRM",
+    slug: "zoho-crm",
     category_slug: "marketing-customer-acquisition",
-    short_description: "Advanced email + automation with CRM-style customer journeys.",
-    long_description: `## ActiveCampaign review\n\nActiveCampaign is the upgrade for serious automation—perfect if you want follow-ups, win-back flows, and segmented promos based on customer behavior.`,
-    affiliate_url: "https://example.com/aff/activecampaign",
-    pricing_starts_at: "$29/mo",
-    pricing_details: "Pricing varies by list size and features.",
-    rating: 4.5,
-    features: ["Email automations", "Segmentation", "Lead scoring", "CRM features"],
-    pros: ["Powerful automation", "Great segmentation", "Scales well"],
-    cons: ["Takes time to set up", "More expensive than basics"],
-    best_for: "Detailers who want serious retention + automation",
-    feature_tags: ["marketing", "email", "automation", "crm"],
+    short_description:
+      "Flexible CRM for tracking leads, pipelines, and customer history — a solid value option.",
+    long_description:
+      "## Zoho CRM review (2026)\n\nZoho CRM works well if you want a customizable CRM to track **leads → booked jobs → repeat customers**.",
+    affiliate_url: aff("zoho-crm"),
+    pricing_starts_at: "$20/user/mo",
+    pricing_details:
+      "Zoho offers multiple tiers. Most small teams start on lower tiers and add features (automation, reporting) as they grow.",
+    rating: 4.3,
+    best_for: "A flexible CRM without agency-level pricing.",
+    features: ["Lead tracking", "Pipelines", "Automations", "Reporting"],
+    feature_tags: ["crm", "automation", "marketing"],
+    pros: ["Customizable", "Good value", "Strong ecosystem"],
+    cons: ["Setup takes time", "Some features gated by tier"],
     faqs: [],
     is_featured: false,
     sort_order: 9,
   },
-
-  // --- Equipment / supplies (modeled as "tools" for SEO + comparisons) ---
   {
-    name: "Chemical Guys",
-    slug: "chemical-guys",
-    category_slug: "equipment-supplies",
-    short_description: "Popular detailing products, kits, and chemicals for pros and enthusiasts.",
-    long_description: `## Chemical Guys review\n\nChemical Guys is known for a wide range of consumer-friendly detailing chemicals and kits. Great for experimenting, but pros often pick specific hero products instead of everything.`,
-    affiliate_url: "https://example.com/aff/chemical-guys",
-    pricing_starts_at: "$",
-    pricing_details: "Varies by product.",
-    rating: 4.1,
-    features: ["Large catalog", "Starter kits", "Commonly available"],
-    pros: ["Easy to find", "Huge selection", "Good beginner kits"],
-    cons: ["Inconsistent product quality", "Some marketing hype"],
-    best_for: "Newer detailers building a starter kit",
-    feature_tags: ["equipment"],
+    name: "Mailchimp",
+    slug: "mailchimp",
+    category_slug: "marketing-customer-acquisition",
+    short_description:
+      "Beginner-friendly email marketing for newsletters, promos, and basic automations.",
+    long_description:
+      "## Mailchimp review (2026)\n\nMailchimp is a classic choice for email marketing. It's simple and widely supported, making it a solid starting point.",
+    affiliate_url: aff("mailchimp"),
+    pricing_starts_at: "Free / paid tiers",
+    pricing_details:
+      "Pricing varies by list size and features. Free tiers can work early; automations and advanced segmentation are typically paid.",
+    rating: 4.2,
+    best_for: "Email newsletters and simple promos.",
+    features: ["Email campaigns", "Templates", "Basic automation", "Signup forms"],
+    feature_tags: ["email", "marketing"],
+    pros: ["Easy to start", "Lots of templates", "Widely known"],
+    cons: ["Costs rise with list size", "Advanced automation limited"],
     faqs: [],
     is_featured: false,
     sort_order: 10,
   },
   {
-    name: "Meguiar's",
-    slug: "meguiars",
-    category_slug: "equipment-supplies",
-    short_description: "Trusted detailing brand with compounds, waxes, and professional lines.",
-    long_description: `## Meguiar's review\n\nMeguiar's is a long-standing brand with many pro-grade products (especially compounds/polishes). Many professionals keep a few Meguiar's staples in their arsenal.`,
-    affiliate_url: "https://example.com/aff/meguiars",
-    pricing_starts_at: "$",
-    pricing_details: "Varies by product.",
-    rating: 4.4,
-    features: ["Pro line options", "Compounds & polishes", "Widely trusted"],
-    pros: ["Consistent staples", "Good polish system", "Strong reputation"],
-    cons: ["Catalog can be confusing", "Some products overlap"],
-    best_for: "Detailers who want proven, consistent products",
-    feature_tags: ["equipment"],
+    name: "ActiveCampaign",
+    slug: "activecampaign",
+    category_slug: "marketing-customer-acquisition",
+    short_description:
+      "Advanced email automation + segmentation + CRM-style features — strong for repeat-business systems.",
+    long_description:
+      "## ActiveCampaign review (2026)\n\nActiveCampaign is ideal if you care about **automated follow-ups**: service reminders, win-back sequences, review requests, and upsell campaigns.",
+    affiliate_url: aff("activecampaign"),
+    pricing_starts_at: "$29/mo",
+    pricing_details:
+      "Pricing depends on contacts and features. It's often worth it if automation boosts repeat bookings.",
+    rating: 4.5,
+    best_for: "Email automation that drives repeat business.",
+    features: ["Automations", "Segmentation", "Email", "Lead scoring"],
+    feature_tags: ["email", "marketing", "automation", "crm"],
+    pros: ["Best-in-class automations", "Great segmentation", "Scales well"],
+    cons: ["More complex than Mailchimp", "Pricing grows with contacts"],
     faqs: [],
-    is_featured: false,
+    is_featured: true,
     sort_order: 11,
   },
 
-  // --- Automation ---
+  // --- Design / Web ---
   {
-    name: "Zapier",
-    slug: "zapier",
-    category_slug: "automation-analytics",
-    short_description: "Connect apps and automate workflows (follow-ups, lead routing, notifications).",
-    long_description: `## Zapier review\n\nZapier connects your tools so you can automate follow-ups, move leads into your CRM, and trigger tasks when bookings happen. Great for detailers who use multiple platforms.`,
-    affiliate_url: "https://example.com/aff/zapier",
-    pricing_starts_at: "$0–$29/mo",
-    pricing_details: "Free and paid tiers. Pricing depends on tasks per month.",
-    rating: 4.3,
-    features: ["App integrations", "Automation workflows", "Webhooks"],
-    pros: ["Tons of integrations", "Quick automations", "No-code"],
-    cons: ["Can get pricey", "Complex zaps need testing"],
-    best_for: "Detailers who want automations without code",
-    feature_tags: ["automation"],
+    name: "Canva",
+    slug: "canva",
+    category_slug: "marketing-customer-acquisition",
+    short_description:
+      "Design tool for ads, flyers, social posts, and brand assets — perfect for fast marketing content.",
+    long_description:
+      "## Canva review (2026)\n\nCanva helps mobile detailers create professional visuals quickly: before/after posts, seasonal promos, and review graphics.",
+    affiliate_url: aff("canva"),
+    pricing_starts_at: "Free / Pro",
+    pricing_details:
+      "Free covers basics. Pro adds brand kits, premium templates, and collaboration.",
+    rating: 4.8,
+    best_for: "Fast, clean marketing designs.",
+    features: ["Templates", "Brand kit", "Social scheduling", "Print exports"],
+    feature_tags: ["marketing"],
+    pros: ["Very easy", "Huge template library", "Great output quality"],
+    cons: ["Some assets gated behind Pro", "Not a full design suite"],
     faqs: [],
     is_featured: false,
     sort_order: 12,
+  },
+
+  // --- Equipment / Supplies ---
+  {
+    name: "Chemical Guys",
+    slug: "chemical-guys",
+    category_slug: "equipment-supplies",
+    short_description:
+      "Popular detailing chemicals and kits — widely available and beginner-friendly for mobile setups.",
+    long_description:
+      "## Chemical Guys (2026)\n\nChemical Guys is known for a wide product lineup. For mobile detailers, availability and variety can be convenient.",
+    affiliate_url: aff("chemical-guys"),
+    pricing_starts_at: "Varies",
+    pricing_details:
+      "Pricing depends on products and bundles. Compare cost-per-oz when stocking your mobile rig.",
+    rating: 4.3,
+    best_for: "Easy-to-find chemicals and bundles.",
+    features: ["Wide product lineup", "Bundles", "Retail availability"],
+    feature_tags: ["equipment"],
+    pros: ["Easy to source", "Huge lineup", "Beginner-friendly"],
+    cons: ["Not always best value", "Some overlapping products"],
+    faqs: [],
+    is_featured: false,
+    sort_order: 13,
+  },
+  {
+    name: "Meguiar's",
+    slug: "meguiars",
+    category_slug: "equipment-supplies",
+    short_description:
+      "Trusted detailing brand with pro-grade staples — a strong choice for consistent results.",
+    long_description:
+      "## Meguiar's (2026)\n\nMeguiar's has long-standing products used by professionals and enthusiasts. Many mobile detailers rely on their staples.",
+    affiliate_url: aff("meguiars"),
+    pricing_starts_at: "Varies",
+    pricing_details:
+      "Pricing varies by product. Pro lines can be cost-effective when bought in bulk.",
+    rating: 4.6,
+    best_for: "Reliable pro staples.",
+    features: ["Polishes", "Compounds", "Coatings", "Interior care"],
+    feature_tags: ["equipment"],
+    pros: ["Consistent results", "Widely trusted", "Good pro options"],
+    cons: ["Some SKUs hard to find locally", "Large catalog"],
+    faqs: [],
+    is_featured: false,
+    sort_order: 14,
+  },
+  {
+    name: "Griot's Garage",
+    slug: "griots-garage",
+    category_slug: "equipment-supplies",
+    short_description:
+      "Premium detailing products and accessories, known for quality and enthusiast/pro crossover.",
+    long_description:
+      "## Griot's Garage (2026)\n\nGriot's is often chosen for quality. If your brand is positioned more premium, it can align well.",
+    affiliate_url: aff("griots-garage"),
+    pricing_starts_at: "Varies",
+    pricing_details: "Pricing depends on product category; bundles can help stock faster.",
+    rating: 4.5,
+    best_for: "Premium positioning and quality kits.",
+    features: ["Premium chemicals", "Accessories", "Tools"],
+    feature_tags: ["equipment"],
+    pros: ["Quality products", "Great accessories", "Strong brand"],
+    cons: ["Higher cost", "Not always in local retail"],
+    faqs: [],
+    is_featured: false,
+    sort_order: 15,
+  },
+  {
+    name: "AutoGeek",
+    slug: "autogeek",
+    category_slug: "equipment-supplies",
+    short_description:
+      "One-stop shop for detailing supplies and pro brands — useful for stocking and replenishing your mobile rig.",
+    long_description:
+      "## AutoGeek (2026)\n\nAutoGeek carries a broad set of brands and tools. It's helpful when you're standardizing products across jobs.",
+    affiliate_url: aff("autogeek"),
+    pricing_starts_at: "Varies",
+    pricing_details: "Pricing varies; look for bulk deals and free shipping thresholds.",
+    rating: 4.4,
+    best_for: "Stocking a wide mix of products.",
+    features: ["Wide catalog", "Bundles", "Pro brands"],
+    feature_tags: ["equipment"],
+    pros: ["Huge selection", "Good bundles", "Pro brand access"],
+    cons: ["Shipping time varies", "Easy to overspend"],
+    faqs: [],
+    is_featured: false,
+    sort_order: 16,
   },
 ];
 
 export const guides = [
   {
-    title: "How to Start a Mobile Detailing Business (Step-by-Step)",
+    title: "How to Start a Mobile Car Detailing Business (2026)",
     slug: "how-to-start-mobile-detailing-business",
-    excerpt: "A practical, no-fluff guide to launching your mobile detailing business—equipment, pricing, marketing, and the software stack to run it.",
-    content: `## 1) Pick your niche and packages\n\nStart with 2–3 packages (maintenance, deep clean, paint correction add-on). Keep pricing simple.\n\n## 2) Get the minimum viable equipment\n\nFocus on reliability: pressure washer, vacuum/extractor, towels, chemicals, and a safe power/water plan.\n\n## 3) Build your software stack\n\nA solid starting stack:\n- Scheduling + CRM: **Jobber** or **Housecall Pro**\n- Payments: **Square** (fast setup)\n- Bookkeeping: **QuickBooks**\n- Email follow-ups: **Mailchimp**\n\n## 4) Marketing that works\n\nStart with local SEO, Google Business Profile, and simple before/after content. Add email + text follow-ups to drive repeat business.\n\n## 5) Scale\n\nWhen you're booked out, raise prices, hire help, and invest in automation and routing.`,
-    category_slug: "marketing-customer-acquisition",
-    related_tool_slugs: ["jobber", "housecall-pro", "square", "quickbooks", "mailchimp"],
-    cover_image: "",
+    excerpt:
+      "A step-by-step 2026 launch checklist: equipment, pricing, insurance basics, marketing, and the software stack that keeps you organized.",
+    content:
+      "# How to Start a Mobile Car Detailing Business (2026)\n\nStarting in 2026 is easier than ever — if you build a tight workflow.\n\n## 1) Pick your service menu\nCreate 3–5 packages (maintenance wash, interior reset, full detail, paint enhancement, ceramic add-on).\n\n## 2) Build a simple system\nUse one tool for scheduling + invoicing, one for payments, and one for marketing follow-up.\n\n## 3) Nail your pricing\nStart with a minimum job size, add travel zones, and upsell high-margin add-ons.\n\n## 4) Get customers\nFocus on Google Business Profile, reviews, before/after content, and referral incentives.\n\n## 5) Scale\nStandardize your process, then add a second tech/van once demand is consistent.\n",
+    category_slug: "software-business-tools",
+    related_tool_slugs: ["jobber", "housecall-pro", "square", "mailchimp"],
     sort_order: 1,
   },
   {
-    title: "Best CRM for Mobile Detailing (What to Choose in 2026)",
+    title: "Best CRM for Mobile Detailing (2026)",
     slug: "best-crm-mobile-detailing",
-    excerpt: "CRMs help you stay organized, sell more packages, and retain clients. Here’s how to pick one for detailing.",
-    content: `## What a CRM should do for a detailer\n\nA good CRM helps you:\n- Track client + vehicle history\n- Follow up automatically\n- Turn quotes into booked jobs\n\n## Our top picks\n\n- **Jobber**: best overall service workflow\n- **Housecall Pro**: great automation\n- **MobileTech RX**: detailing-specific workflows\n\n## What to avoid\n\nDon't overcomplicate early. Pick something you’ll actually use daily.`,
-    category_slug: "software-business-tools",
-    related_tool_slugs: ["jobber", "housecall-pro", "mobiletech-rx"],
-    cover_image: "",
+    excerpt:
+      "CRMs that help detailers track leads, automate follow-ups, and generate repeat business — with 2026-ready workflows.",
+    content:
+      "# Best CRM for Mobile Detailing (2026)\n\nA CRM helps you turn one-time clients into repeat customers.\n\n## What to prioritize\n- Follow-up automation (reviews, reminders, win-back sequences)\n- Customer history (vehicles, preferences, notes)\n- Easy tagging/segmentation\n\n## Recommended approach\nIf you're new: start simple (Jobber/Housecall Pro CRM basics).\nIf you're growth-focused: pair a real CRM/automation tool (HighLevel or ActiveCampaign) with your scheduling system.\n",
+    category_slug: "marketing-customer-acquisition",
+    related_tool_slugs: ["activecampaign", "highlevel", "zoho-crm", "jobber"],
     sort_order: 2,
   },
   {
-    title: "Square vs Stripe for Mobile Detailers",
-    slug: "square-vs-stripe-for-mobile-detailers",
-    excerpt: "Both are great. One is easier; one is more flexible. Here’s how to choose.",
-    content: `## The quick answer\n\n- Choose **Square** if you want the easiest on-site payments.\n- Choose **Stripe** if you need advanced online billing or custom checkout.\n\n## What matters most\n\nFees, deposits, invoicing, and how you want customers to pay (in-person vs online).`,
-    category_slug: "payments-accounting",
-    related_tool_slugs: ["square", "stripe"],
-    cover_image: "",
+    title: "Mobile Detailing Pricing & Packages Template (2026)",
+    slug: "mobile-detailing-pricing-packages-2026",
+    excerpt:
+      "A practical pricing framework for 2026: packages, add-ons, minimums, and how to stop undercharging.",
+    content:
+      "# Mobile Detailing Pricing & Packages (2026)\n\n## The 3-package rule\nOffer a Good/Better/Best package so clients self-select.\n\n## Add-ons are your margin\nOdor removal, pet hair, engine bay, and ceramic boosters can raise ticket size quickly.\n\n## Set a minimum\nA minimum job price protects your time and travel.\n",
+    category_slug: "software-business-tools",
+    related_tool_slugs: ["jobber", "square", "quickbooks-online"],
     sort_order: 3,
+  },
+  {
+    title: "Local Marketing Playbook for Mobile Detailers (2026)",
+    slug: "local-marketing-playbook-mobile-detailing-2026",
+    excerpt:
+      "A 2026 marketing system: Google reviews, content, referral loops, and follow-up automation to keep your calendar full.",
+    content:
+      "# Local Marketing Playbook (2026)\n\n## The core loop\n1) Great job → 2) Before/after content → 3) Review request → 4) Referral incentive → 5) Automated follow-up\n\n## Tools that help\nUse email automation (ActiveCampaign) or an all-in-one platform (HighLevel) to keep follow-ups consistent.\n",
+    category_slug: "marketing-customer-acquisition",
+    related_tool_slugs: ["activecampaign", "highlevel", "canva", "mailchimp"],
+    sort_order: 4,
   },
 ];
