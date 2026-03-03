@@ -40,7 +40,7 @@ export default function ToolHero({ tool }) {
             ))}
           </div>
 
-          <AffiliateButton href={tool.affiliate_url} name={tool.name} variant="primary" size="lg" />
+          <AffiliateButton href={tool.official_site_url || tool.affiliate_url} name={tool.name} variant="primary" size="lg" />
         </div>
 
         <div className="bg-[#0f1117] border border-[#2a2e3b] rounded-xl p-6 min-w-[240px]">

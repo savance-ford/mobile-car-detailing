@@ -69,7 +69,8 @@ export default function ComparisonTable({ tools = [] }) {
             <td className="py-4 px-4"></td>
             {tools.map(tool => (
               <td key={tool.slug} className="py-4 px-4 text-center">
-                <AffiliateButton href={tool.affiliate_url} name={tool.name} variant="primary" size="sm" />
+                {/* add affiliate link when available */}
+                <AffiliateButton href={tool.official_site_url || tool.affiliate_url} name={tool.name} variant="primary" size="sm" />
               </td>
             ))}
           </tr>

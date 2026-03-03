@@ -68,6 +68,7 @@ export const tools = [
     long_description:
       "## Jobber review (2026)\n\nJobber is a strong all-in-one system for mobile detailers who want **scheduling, invoicing, and a simple CRM** without a complicated setup.\n\n### Why detailers like it\n- Online booking and fast quote → invoice workflows\n- Automated reminders to reduce no-shows\n- Clean mobile experience when you're on the road\n\n### Who it's best for\nSolo operators and small teams that want a polished customer experience and reliable back-office basics.",
     affiliate_url: aff("jobber"),
+    official_site_url: "https://getjobber.com",
     pricing_starts_at: "$29/mo",
     pricing_details:
       "Expect starter plans in the $20–$40/mo range, with higher tiers adding automation, reporting, and multi-user workflows.",
@@ -101,6 +102,7 @@ export const tools = [
     long_description:
       "## Housecall Pro review (2026)\n\nHousecall Pro is built for service businesses that want an operational hub: **dispatching, scheduling, invoicing, and payments** with automation layers.\n\n### Great for growth\nIf you're adding techs, routes, or multiple vans, Housecall Pro can keep operations consistent.",
     affiliate_url: aff("housecall-pro"),
+    official_site_url: "https://www.housecallpro.com",
     pricing_starts_at: "$49/mo",
     pricing_details:
       "Starter pricing varies by promotions and tiers. Expect higher tiers if you need deeper automation and team features.",
@@ -129,6 +131,7 @@ export const tools = [
     long_description:
       "## PocketSuite review (2026)\n\nPocketSuite is a streamlined option for solo mobile detailers who want **booking, payments, and client messaging** without a complex setup.",
     affiliate_url: aff("pocketsuite"),
+    official_site_url: "https://www.pocketsuite.io",
     pricing_starts_at: "$19/mo",
     pricing_details:
       "Often positioned as an affordable solo-operator tool with upgrades for additional features.",
@@ -153,6 +156,7 @@ export const tools = [
     long_description:
       "## MobileTech RX review (2026)\n\nMobileTech RX is one of the most recognized detailing platforms for **package building, inspections, and upsells**.\n\nIf you want a system designed around vehicles and detailing services (not generic jobs), this is a top option.",
     affiliate_url: aff("mobiletech-rx"),
+    official_site_url: "https://mobiletechrx.com",
     pricing_starts_at: "$29/mo",
     pricing_details:
       "Pricing depends on plan and team size. Many detailers justify the cost through higher average ticket size from inspections/upsells.",
@@ -177,6 +181,7 @@ export const tools = [
     long_description:
       "## Square review (2026)\n\nSquare is a go-to for **card payments on the spot**, plus invoices and simple customer tracking.",
     affiliate_url: aff("square"),
+    official_site_url: "https://squareup.com",
     pricing_starts_at: "Free + processing fees",
     pricing_details:
       "Most Square products have no monthly fee; you typically pay transaction processing fees and optional add-ons.",
@@ -199,6 +204,7 @@ export const tools = [
     long_description:
       "## Stripe review (2026)\n\nStripe is powerful if you want **custom payment flows**, subscriptions, or deeper integrations with your website/app.",
     affiliate_url: aff("stripe"),
+    official_site_url: "https://stripe.com",
     pricing_starts_at: "Processing fees",
     pricing_details:
       "Stripe generally charges per-transaction fees; exact pricing depends on your products and region.",
@@ -221,6 +227,7 @@ export const tools = [
     long_description:
       "## QuickBooks Online review (2026)\n\nIf you want clean books (and less stress at tax time), QuickBooks Online is a common pick for mobile detailers.",
     affiliate_url: aff("quickbooks-online"),
+
     pricing_starts_at: "$30/mo",
     pricing_details:
       "Plans vary by features (reporting, inventory, payroll add-ons). Many businesses start on lower tiers and upgrade as needed.",
@@ -245,6 +252,7 @@ export const tools = [
     long_description:
       "## HighLevel review (2026)\n\nHighLevel bundles **funnels, automation, and CRM** into one platform. It's powerful if you're running ads, follow-ups, and want a real pipeline.",
     affiliate_url: aff("highlevel"),
+
     pricing_starts_at: "$97/mo",
     pricing_details:
       "Higher tiers add more sub-accounts, advanced features, and agency-style tools.",
@@ -267,6 +275,7 @@ export const tools = [
     long_description:
       "## Zoho CRM review (2026)\n\nZoho CRM works well if you want a customizable CRM to track **leads → booked jobs → repeat customers**.",
     affiliate_url: aff("zoho-crm"),
+    official_site_url: "https://www.zoho.com/crm/",
     pricing_starts_at: "$20/user/mo",
     pricing_details:
       "Zoho offers multiple tiers. Most small teams start on lower tiers and add features (automation, reporting) as they grow.",
@@ -289,6 +298,7 @@ export const tools = [
     long_description:
       "## Mailchimp review (2026)\n\nMailchimp is a classic choice for email marketing. It's simple and widely supported, making it a solid starting point.",
     affiliate_url: aff("mailchimp"),
+  
     pricing_starts_at: "Free / paid tiers",
     pricing_details:
       "Pricing varies by list size and features. Free tiers can work early; automations and advanced segmentation are typically paid.",
@@ -311,6 +321,7 @@ export const tools = [
     long_description:
       "## ActiveCampaign review (2026)\n\nActiveCampaign is ideal if you care about **automated follow-ups**: service reminders, win-back sequences, review requests, and upsell campaigns.",
     affiliate_url: aff("activecampaign"),
+    official_site_url: "https://www.activecampaign.com",
     pricing_starts_at: "$29/mo",
     pricing_details:
       "Pricing depends on contacts and features. It's often worth it if automation boosts repeat bookings.",
@@ -335,6 +346,7 @@ export const tools = [
     long_description:
       "## Canva review (2026)\n\nCanva helps mobile detailers create professional visuals quickly: before/after posts, seasonal promos, and review graphics.",
     affiliate_url: aff("canva"),
+    official_site_url: "https://www.canva.com",
     pricing_starts_at: "Free / Pro",
     pricing_details:
       "Free covers basics. Pro adds brand kits, premium templates, and collaboration.",
@@ -359,6 +371,7 @@ export const tools = [
     long_description:
       "## Chemical Guys (2026)\n\nChemical Guys is known for a wide product lineup. For mobile detailers, availability and variety can be convenient.",
     affiliate_url: aff("chemical-guys"),
+    official_site_url: "https://www.chemicalguys.com",
     pricing_starts_at: "Varies",
     pricing_details:
       "Pricing depends on products and bundles. Compare cost-per-oz when stocking your mobile rig.",
@@ -381,6 +394,7 @@ export const tools = [
     long_description:
       "## Meguiar's (2026)\n\nMeguiar's has long-standing products used by professionals and enthusiasts. Many mobile detailers rely on their staples.",
     affiliate_url: aff("meguiars"),
+    official_site_url: "https://www.meguiars.com",
     pricing_starts_at: "Varies",
     pricing_details:
       "Pricing varies by product. Pro lines can be cost-effective when bought in bulk.",
@@ -403,6 +417,7 @@ export const tools = [
     long_description:
       "## Griot's Garage (2026)\n\nGriot's is often chosen for quality. If your brand is positioned more premium, it can align well.",
     affiliate_url: aff("griots-garage"),
+    official_site_url: "https://www.griotsgarage.com",
     pricing_starts_at: "Varies",
     pricing_details: "Pricing depends on product category; bundles can help stock faster.",
     rating: 4.5,
@@ -424,6 +439,7 @@ export const tools = [
     long_description:
       "## AutoGeek (2026)\n\nAutoGeek carries a broad set of brands and tools. It's helpful when you're standardizing products across jobs.",
     affiliate_url: aff("autogeek"),
+    official_site_url: "https://www.autogeek.net",
     pricing_starts_at: "Varies",
     pricing_details: "Pricing varies; look for bulk deals and free shipping thresholds.",
     rating: 4.4,
