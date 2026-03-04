@@ -227,7 +227,7 @@ export const tools = [
     long_description:
       "## QuickBooks Online review (2026)\n\nIf you want clean books (and less stress at tax time), QuickBooks Online is a common pick for mobile detailers.",
     affiliate_url: aff("quickbooks-online"),
-
+    official_site_url: "https://quickbooks.intuit.com",
     pricing_starts_at: "$30/mo",
     pricing_details:
       "Plans vary by features (reporting, inventory, payroll add-ons). Many businesses start on lower tiers and upgrade as needed.",
@@ -252,7 +252,7 @@ export const tools = [
     long_description:
       "## HighLevel review (2026)\n\nHighLevel bundles **funnels, automation, and CRM** into one platform. It's powerful if you're running ads, follow-ups, and want a real pipeline.",
     affiliate_url: aff("highlevel"),
-
+    official_site_url: "https://www.gohighlevel.com",
     pricing_starts_at: "$97/mo",
     pricing_details:
       "Higher tiers add more sub-accounts, advanced features, and agency-style tools.",
@@ -298,7 +298,7 @@ export const tools = [
     long_description:
       "## Mailchimp review (2026)\n\nMailchimp is a classic choice for email marketing. It's simple and widely supported, making it a solid starting point.",
     affiliate_url: aff("mailchimp"),
-  
+    official_site_url: "https://mailchimp.com",
     pricing_starts_at: "Free / paid tiers",
     pricing_details:
       "Pricing varies by list size and features. Free tiers can work early; automations and advanced segmentation are typically paid.",
