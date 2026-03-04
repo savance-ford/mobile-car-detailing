@@ -30,7 +30,7 @@
       "type": "string",
       "description": "Affiliate tracking link"
     },
-    "official_url": {
+    "official_site_url": {
       "type": "string",
       "description": "Official website URL"
     },
