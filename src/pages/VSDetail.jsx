@@ -112,7 +112,7 @@ export default function VSDetail() {
             </div>
             <p className="text-sm text-gray-400 mb-4">{tool.short_description}</p>
             <div className="text-lg font-semibold text-white mb-4">Starting at {tool.pricing_starts_at}</div>
-            <AffiliateButton href={tool.affiliate_url} name={tool.name} variant={idx === 0 ? "primary" : "outline"} size="md" />
+            <AffiliateButton href={tool.official_site_url || tool.affiliate_url} name={tool.name} variant={idx === 0 ? "primary" : "outline"} size="md" />
           </div>
         ))}
       </div>

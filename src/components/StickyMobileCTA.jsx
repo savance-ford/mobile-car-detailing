@@ -15,7 +15,8 @@ export default function StickyMobileCTA({ tool }) {
           <div className="text-xs text-gray-400">{tool.pricing_starts_at}</div>
         </div>
         <a
-          href={tool.affiliate_url}
+        // add affiliate link when available, otherwise link to official site
+          href={tool.official_site_url || tool.affiliate_url}
           target="_blank"
           rel="nofollow sponsored noopener"
           className="affiliate-btn-shimmer text-white px-5 py-2.5 rounded-xl text-sm font-medium flex items-center gap-2 whitespace-nowrap"

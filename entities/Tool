@@ -30,6 +30,10 @@
       "type": "string",
       "description": "Affiliate tracking link"
     },
+    "official_site_url": {
+      "type": "string",
+      "description": "Official website URL"
+    },
     "pricing_starts_at": {
       "type": "string",
       "description": "Starting price display string"

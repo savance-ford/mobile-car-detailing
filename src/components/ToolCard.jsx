@@ -39,7 +39,7 @@ export default function ToolCard({ tool, showAffiliate = false }) {
           {tool.pricing_starts_at ? `From ${tool.pricing_starts_at}` : "See pricing"}
         </span>
         {showAffiliate ? (
-          <AffiliateButton href={tool.affiliate_url} name={tool.name} variant="ghost" size="sm" />
+          <AffiliateButton href={tool.official_site_url || tool.affiliate_url} name={tool.name} variant="ghost" size="sm" />
         ) : (
           <Link
             to={createPageUrl(`ToolDetail?slug=${tool.slug}`)}
